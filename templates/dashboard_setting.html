@@ -1,0 +1,547 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{{election_variable}} Result</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Unicat project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<style>
+  .show-grid{
+        display: grid;
+         grid-template-columns: 20% 60%;
+         width:300px;
+         grid-column-gap:30px;
+         margin-top:20px;
+  }
+.form{
+ margin:20px 0px;
+}
+    .form1{
+ margin:10px 0px;
+}
+.form-group{
+padding-left:20px;
+
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <p class="modal-title"><b>Election Creation Form</b></p>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+
+             <div class="card-body">
+                <form  action="create_election" method="post">
+					{% csrf_token %}
+    
+
+        <div class="form1"><span>Election Title</span><br><input type="text"name="election_title" style="width:300px; height: 30px;"></div>
+        <div class="form1"><span>Election Code</span><br><input type="text" name="election_code" style="width:300px; height: 30px;"></div>
+
+
+   
+        <div class="form1"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+  </form>
+
+            </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header">
+
+		<!-- Top Bar -->
+		<div class="top_bar">
+			<div class="top_bar_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+								<ul class="top_bar_contact_list">
+									<li><div class="question">Have any questions?</div></li>
+									<li>
+										<i class="fa fa-phone" aria-hidden="true"></i>
+										<div>+234-7089-35-7002</div>
+									</li>
+									<li>
+										<i class="fa fa-envelope-o" aria-hidden="true"></i>
+										<div>Adeshinex4u@gmail.com</div>
+									</li>
+								</ul>
+								<div class="top_bar_login ml-auto">
+									<div class="login_button"><a href="#">HELP & SUPPORT</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Content -->
+		<div class="header_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_content d-flex flex-row align-items-center justify-content-start">
+							<div class="logo_container">
+								<a href="#">
+									<div class="logo_text">Campus<span>Voting</span></div>
+								</a>
+							</div>
+							<nav class="main_nav_contaner ml-auto">
+								<ul class="main_nav">
+									  <li class="menu_mm"><a href="/">Home</a></li>
+
+
+									<li class="menu_mm"><a  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" href="#" style="padding:2px 15px; color:white;">Create Election</a></li>
+								</ul>
+
+
+								<!-- Hamburger -->
+
+
+								<div class="hamburger menu_mm">
+									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+								</div>
+							</nav>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Search Panel -->
+		<div class="header_search_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_search_content d-flex flex-row align-items-center justify-content-end">
+							<form action="reg_log/check_result" class="header_search_form" method="post">
+								 {% csrf_token %}
+								<input type="search" name="vote_ids" class="search_input" placeholder="Enter Vote Id To Check Vote Result" required="required">
+								<button class="header_search_button d-flex flex-column align-items-center justify-content-center">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<div class="search">
+			<form action="#" class="header_search_form menu_mm">
+				<input type="search" class="search_input menu_mm" placeholder="Search" required="required">
+				<button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
+					<i class="fa fa-search menu_mm" aria-hidden="true"></i>
+				</button>
+			</form>
+		</div>
+		<nav class="menu_nav">
+			<ul class="menu_mm">
+                <li class="menu_mm"><a href="/">Home</a></li>
+
+
+									<li class="menu_mm"><a  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" href="#" style="padding:2px 15px; color:white;">Create Election</a></li>
+
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Home -->
+
+
+
+	<!-- Features -->
+
+
+	<!-- Popular Courses -->
+
+
+
+	<!-- Counter -->
+
+
+
+	<!-- Events -->
+    <div  style="margin:150px 70px;">
+
+			{% for message in messages %}
+			 <div class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{{message}}</strong>
+  </div>
+			{% endfor %}
+Many factors can cause YouTube video streaming issues. By troubleshooting your Internet or device connection, you can play your videos again.
+
+If you've seen one of these notifications, you may be experiencing a video streaming issue:
+
+An error has occurred.
+Playback error. Tap to retry.
+Connection to server lost.
+This video is unavailable.
+Something went wrong. Tap to Retry.{{request.user}}
+{% if user_elections %}
+        <p style="padding-top:20px; text-transform: uppercase; color:#384158; font-weight:bold;"><u>Choose to Show or not to Show voting Results to Voters</u></p>
+       {% else %}
+				<h4></h4>
+				{% endif %}
+		{% for election in user_elections %}
+        <div class="show-grid">
+
+     {% if election.election_shows %}
+            <div>
+
+<form action="election_result_control" method="post">
+{% csrf_token %}
+
+    <input type="number" name="election_shows" value="0" hidden>
+    <input type="text" value="{{election.election_title}}" name="election_title" hidden>
+    <button type="submit" style=" border:1px solid #2196F3; color:#27282b; width:100px; border-radius:3px; padding:4px 4px;">Don't Show</button>
+</form>
+            </div>
+			{% else %}
+            <div>
+        <form action="election_result_control" method="post">
+{% csrf_token %}
+
+			<input type="number" name="election_shows" value="1" hidden>
+			 <input type="text" value="{{election.election_title}}" name="election_title" hidden>
+            <button type="submit"  style="background-color:#2196F3; border:0px; color:#27282b; width:80px; border-radius:3px; padding:4px 4px;">Show</button>
+
+</form>
+            </div>
+			{% endif %}
+            <div style="padding-top:3px;">
+<span style="padding-left:30px; padding-top:8px;  text-transform: uppercase;;">
+    <b> {{election.election_title}}</b>
+</span>
+            </div>
+        </div>
+		{% endfor %}
+        <hr>
+        <div style="padding-top:1px;">
+
+            <p>please upload a csv file containing the required informations as specified in the <a href="" style="border-bottom:1px solid #2196F3;">HOW TO USE</a> video</p>
+            <form action="create_voters" method="post" style="padding-top:10px;" enctype="multipart/form-data">
+				{% csrf_token %}
+            <label class="file">
+  <input type="file" name="file"  aria-label="File browser example">
+
+				<div class="form"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+  <span class="file-custom"></span>
+            </label></form>
+        </div>
+        <hr>
+        <div>
+             <p style="padding-top:20px; text-transform: uppercase; color:#384158; font-weight:bold;"><u>Please, Fill this form to register candidates</u></p>
+
+    <form action="candidate_upload" method="post">
+		{% csrf_token %}
+        <div class="form"><span>Candidate Name</span><br><input type="text" name="candidate_name" style="width:300px; height: 30px;"></div>
+        <div class="form"><span>Candidate Code</span><br><input type="text" name="candidate_code" style="width:300px; height: 30px;"></div>
+        <div class="form"><span>Candidate Election</span><br><select name="candidate_election" type="text" style="width:300px; height: 30px;">
+    {% for elections in user_elections %}
+            <option>{{ elections }}</option>
+    {% endfor %}
+        </select>
+		</div> <div class="form"><span>Candidate Position</span><br><select name="candidate_position" type="text" style="width:300px; height: 30px;">
+    {% for positions in position_all %}
+            <option>{{ positions }}</option>
+    {% endfor %}
+        </select>
+		</div>
+        <span>Candidate Passport Photograph</span><br>
+         <input type="file" name="candidate_pic"  aria-label="File browser example">
+
+       <div class="form"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+    </form>
+
+        </div>
+
+		<hr>
+		 <p style="padding-top:20px; text-transform: uppercase; color:#384158; font-weight:bold;"><u>Please, Fill This Form To Resend Voting ID</u></p>
+		<form action="resend_voting_id" method="post">
+			{% csrf_token %}
+			<div class="form"><span>Matric Number</span><br><input type="text" name="voting_id" style="width:300px; height: 30px;"></div>
+			<div class="form"><span>Election Title</span><br><input type="text" name="election_title" style="width:300px; height: 30px;"></div>
+
+
+		 <div class="form"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+		</form>
+
+
+
+
+		<hr>
+		 <p style="padding-top:20px; text-transform: uppercase; color:#384158; font-weight:bold;"><u>scheduler (Election Start Time)<i style="padding-left:10px;" class="fa fa-bell-o" style="font-size:20px;"></i></u></p>
+		<form class="form-inline" action="election_start_date_update" method="post">
+			{% csrf_token %}
+			 <div class="form-group">
+
+      <select name="election_title" type="text" style="width:150px; height: 30px;">
+    {% for elections in user_elections %}
+            <option>{{ elections }}</option>
+    {% endfor %}
+        </select>
+    </div>
+			<div class="form-group" >
+
+      <input type="text"   placeholder="Year" name="year">
+    </div>
+
+			 <div class="form-group">
+
+      <input type="text"   placeholder="Month" name="month">
+    </div>
+			 <div class="form-group">
+      <input type="text" placeholder="Day" name="day">
+    </div>
+			 <div class="form-group">
+      <input type="text" placeholder="Hour" name="hour">
+    </div> <div class="form-group">
+      <input type="text" placeholder="Minutes" name="minutes">
+    </div>
+
+ <div class="form-group">
+       <div class="form"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+    </div>
+
+		</form>
+
+
+
+
+
+
+
+		<hr>
+		 <p style="padding-top:20px; text-transform: uppercase; color:#384158; font-weight:bold;"><u>scheduler(Election End Time)<i style="padding-left:10px;" class="fa fa-bell" style="font-size:20px;"></i></u></p>
+		<form class="form-inline" action="election_end_date_update" method="post">
+			{% csrf_token %}
+			 <div class="form-group">
+
+      <select name="election_title" type="text" style="width:150px; height: 30px;">
+    {% for elections in user_elections %}
+            <option>{{ elections }}</option>
+    {% endfor %}
+        </select>
+    </div>
+			<div class="form-group" >
+
+      <input type="text"   placeholder="Year" name="year">
+    </div>
+
+			 <div class="form-group">
+
+      <input type="text"   placeholder="Month" name="month">
+    </div>
+			 <div class="form-group">
+      <input type="text" placeholder="Day" name="day">
+    </div>
+			 <div class="form-group">
+      <input type="text" placeholder="Hour" name="hour">
+    </div> <div class="form-group">
+      <input type="text" placeholder="Minutes" name="minutes">
+    </div>
+
+ <div class="form-group">
+       <div class="form"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+    </div>
+
+		</form>
+<p style="padding-top:20px; text-transform: uppercase; color:#384158; font-weight:bold;"><u>Check Election Result</u></p>
+<form action="check_election_result" method="post">
+			{% csrf_token %}
+			<div class="form"><span>Election Title</span><br>
+
+
+				 <select name="election_title" type="text" style="width:300px; height: 30px;">
+    {% for election in user_elections %}
+            <option>{{election}}</option>
+    {% endfor %}
+        </select>
+			<div class="form"><span>Position</span><br>
+			 <select name="position" type="text" style="width:300px; height: 30px;">
+    {% for positions in position_all %}
+            <option>{{positions}}</option>
+    {% endfor %}
+        </select>
+
+			</div>
+
+			</div>
+		 <div class="form"><input type="submit" class="btn btn-primary" style="width: 100px; height: 30px; font-size: 15px;"></div>
+		</form>
+
+        </div>
+
+
+				<!-- Event -->
+
+	<!-- Team -->
+
+
+	<!-- Latest News -->
+
+
+
+	<!-- Newsletter -->
+
+
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="footer_background" style="background-image:url({% static 'images/footer_background.png' %})"></div>
+		<div class="container">
+			<div class="row footer_row">
+				<div class="col">
+					<div class="footer_content">
+						<div class="row">
+
+							<div class="col-lg-3 footer_col">
+
+								<!-- Footer About -->
+								<div class="footer_section footer_about">
+									<div class="footer_logo_container">
+										<a href="#">
+											<div class="footer_logo_text">Campus<span>Voting</span></div>
+										</a>
+									</div>
+									<div class="footer_about_text">
+										<p>E-voting Made Easy,<br> vote and be voted for.</p>
+									</div>
+									<div class="footer_social">
+										<ul>
+											<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-lg-3 footer_col">
+
+								<!-- Footer Contact -->
+								<div class="footer_section footer_contact">
+									<div class="footer_title">Contact Us</div>
+									<div class="footer_contact_info">
+										<ul>
+											<li>Email: adeshinex4u@gmail.com</li>
+											<li>Phone:  +(234) 708 357 002</li>
+											<li>41 Adjacent Rayfield Resort,Jos Nigeria</li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-lg-3 footer_col">
+
+								<!-- Footer links -->
+								<div class="footer_section footer_links">
+									<div class="footer_title">Contact Us</div>
+									<div class="footer_links_container">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="about.html">About</a></li>
+											<li><a href="contact.html">Contact</a></li>
+											<li><a href="#">Features</a></li>
+											<li><a href="courses.html">Courses</a></li>
+											<li><a href="#">Events</a></li>
+											<li><a href="#">Gallery</a></li>
+											<li><a href="#">FAQs</a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-lg-3 footer_col clearfix">
+
+								<!-- Footer links -->
+								<div class="footer_section footer_mobile">
+									<div class="footer_title">Mobile</div>
+									<div class="footer_mobile_content">
+										<div class="footer_image"><a href="#"><img src="{% static 'images/mobile_1.png' %}" alt=""></a></div>
+										<div class="footer_image"><a href="#"><img src="{% static 'images/mobile_2.png' %}" alt=""></a></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+     <script src="https://widget.flowxo.com/embed.js" data-fxo-widget="eyJ0aGVtZSI6IiM0MjU3ZjUiLCJ3ZWIiOnsiYm90SWQiOiI1ZmFjMGY4ODE3NThjOTAwMWFjNzQ3ZjEiLCJ0aGVtZSI6IiM0MjU3ZjUifSwicG9wdXBIZWlnaHQiOiI1MCUifQ==" async defer></script>
+</body>
+</html>

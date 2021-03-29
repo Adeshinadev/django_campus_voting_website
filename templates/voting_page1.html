@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Candidates</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+body{
+        background-image: url({% static 'images/pexels-pixabay-267507.jpg' %});
+        background-size:cover;
+    background-repeat: no-repeat;
+<!--background-color:red;-->
+    }
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+    img {
+  border-radius: 50%;
+}
+</style>
+    <script>
+function validateForm() {
+  var x = document.forms["myForm"]["vote_ids"].value;
+  if (x == "" || x == null) {
+    alert("Please Enter  your ID");
+    return false;
+  }
+}
+</script>
+</head>
+<body>
+
+<div class="container-fluid">
+<!--  <h2><b>Eksu Sug Election Candidates</b></h2>-->
+<!--    <div style="font-size: 20px; font-family: serif;">Hello,</div>-->
+<!--    <div style="font-size: 20px; font-family: serif;">welcome to your voting panel,please Ensure to vote the candidate of your choice</div>-->
+<!--    <div style="font-size: 20px; font-family: serif; ">as it's impossible to change your choice of candidate after voting after voting.</div>-->
+  <div class="row" style="padding: 90px;">
+      {% for cand in candidate %}
+    <div class="col-sm-4" >
+        <div style="text-align:left; transform: rotate(-25deg); font-size:20px; padding-left:8px;"><span><b>Easy</b></span><span style="color:#3786bd;"><b>Voting</b></span></div>
+        <div class="card" style="background-color:white; padding-top:20px;">
+
+  <img src="{% static 'images/img_avatar.png' %}" alt="Avatar" style="width:150px; padding-top:12px;">
+  <h1 style="font-size:20px;">{{cand.candidate_name}}</h1>
+  <p class="title" style="font-size:15px;">{{cand.candidate_code}}</p>
+  <p class="title" style="font-size:15px;">{{cand.candidate_election}}</p>
+
+
+            <form name="myForm" action="vote" method="post"  >
+    {% csrf_token %}
+                 <div class="form-group" style="padding-left:10px; padding-right:10px;">
+    <label for="pwd">Voters ID</label>
+    <input type="text" name="vote_ids" placeholder="Enter your id:" class="form-control" id="pwd">
+  </div>
+<!--                <div >-->
+<!--    Enter your id: <input type="text" name="vote_ids"  placeholder="Enter your id:"><br></div>-->
+                <div hidden>
+     Enter candidate id: <input type="text" name="vote_candidate_code" placeholder="Enter candidate id:" value="{{cand.candidate_code}}"><br>
+                    </div>
+
+   <p><button style="background-color:#3786bd;">Vote</button></p>
+</form>
+
+</div>
+
+        </div>
+   {% endfor %}
+  </div>
+</div>
+{% for message in messages %}
+    <center>
+<div>{{message}}</div>
+        </center>
+{% endfor %}
+
+<!--
+<div class="card">
+  <img src="img_avatar.png" alt="Avatar" style="width:150px">
+  <h1>John Doe</h1>
+  <p class="title">CEO & Founder, Example</p>
+  <p>Harvard University</p>
+  <div style="margin: 24px 0;">
+    <a href="#"><i class="fa fa-dribbble"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-facebook"></i></a>
+  </div>
+  <p><button>Contact</button></p>
+</div>
+-->
+
+</body>
+</html>

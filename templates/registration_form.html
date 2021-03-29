@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>EasyVoting/Registration</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/line-awesome/css/line-awesome.min.css' %}">
+	<!-- Jquery -->
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{% static 'css/formstyle.css' %}"/>
+</head>
+<body class="form-v4">
+	<div class="page-content">
+		<div class="form-v4-content">
+			<div class="form-left">
+				<h2>Final Registration Process</h2>
+				 
+        <p class='reg_pro'>
+    
+            Welcome <b>Aina Adeshina</b>,Thank you for choosing CampusVoting this is the final regsitration process for your account activation please fill the form meticolously as any mistake will require you to put a message/call through to us so we can help you correct it.
+<br><br>
+When you are done filling this form,you'll be redirected to the Login page,please enter you credentials and you'll be redirected to your dashboard,proceed to register the candidate and voters that are eligible for the elections,if you want more direction about this processes please click on the How to use link on the Dashboard Page.
+     </p>
+			</div>
+			<form class="form-detail" action="final_reg" method="post" id="myform">
+				{% csrf_token %}
+				<h2>Register Form</h2>
+				<div class="form-group">
+
+
+					<input  name="users"  value="{{username}}" hidden>
+
+
+					<div class="form-row form-row-1">
+						<label for="first_name">First Name:</label>
+						<input type="text" name="first_name" id="first_name" class="input-text">
+					</div>
+					<div class="form-row form-row-1">
+						<label for="last_name">Last Name:</label>
+						<input type="text" name="last_name" id="last_name" class="input-text">
+					</div>
+				</div><div class="form-group">
+					
+					<div class="form-row form-row-1">
+						<label for="last_name">Type of Organization</label>
+						<input type="text" name="type_of_organization" name="" id="last_name" class="input-text">
+					</div>
+                
+                <div class="form-row form-row-1">
+						<label for="first_name">Organization Name:</label>
+						<input type="text" name="organization_name" id="first_name" class="input-text">
+					</div>
+				</div><div class="form-group">
+					<div class="form-row form-row-1">
+						<label for="first_name">Phone No:</label>
+						<input type="text" name="phone_no" id="first_name" class="input-text">
+					</div>
+					
+				</div>
+			
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Register">
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+</body>
+</html>
